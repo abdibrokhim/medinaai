@@ -1,7 +1,7 @@
 import { Page, Text, View, Document, StyleSheet, renderToStream, Image, Font } from '@react-pdf/renderer';
 import { Timestamp } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
-import { Patient, Observation, Hospital, PatientObservation, ObservationDefaultView, ShareReport, ReportProps } from '../../types';
+import { Patient, Hospital, ReportProps } from '../../types';
 
 const studyType = "PROTOCOL OF MRI STUDY OF THE BRAIN";
 const disclaimerA = 'This conclusion is not a final diagnosis and requires comparison with clinical and laboratory data.';

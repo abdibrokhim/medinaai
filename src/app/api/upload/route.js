@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc, updateDoc, addDoc } from 'firebase/firestore';
-import { getStorage, ref, uploadString, getDownloadURL, uploadBytes } from 'firebase/storage';
+import { getStorage, ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { app } from '../../firebaseConfig';
 
 const storage = getStorage(app);

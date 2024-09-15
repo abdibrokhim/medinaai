@@ -2,24 +2,18 @@
 
 import Image from "next/image";
 import {
-  SignInButton,
   SignedIn,
-  SignedOut,
   UserButton,
   useUser,
 } from '@clerk/nextjs'
 import React, { useCallback, useEffect, useState, useRef, memo } from 'react';
-import { faAdd, faChevronDown, faClose, faFile, faChevronLeft, faChevronRight, faCompass, faShare, faPrint, faUpRightAndDownLeftFromCenter, faExpand, faSquareCheck, faTrash, faCircleCheck, faClone, faPenNib, faSquareMinus, faMinus, faCircleInfo, faEye, faBrain } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faChevronDown, faClose, faFile, faChevronLeft, faChevronRight, faCompass, faShare, faPrint, faExpand, faTrash, faCircleCheck, faClone, faPenNib, faMinus, faCircleInfo, faEye, faBrain } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Patient, Observation, Hospital, PatientObservation, ObservationDefaultView, ShareReport, ReportProps } from './types';
 import Notification from './notify';
-import { NextResponse } from 'next/server'
-import { Page, Text, View, Document, StyleSheet, Font, PDFViewer, Image as PdfImage } from '@react-pdf/renderer';
-import ReactPDF from "@react-pdf/renderer"
-import { getFirestore, collection, getDocs, getDoc, setDoc, doc, deleteDoc, updateDoc, addDoc, Timestamp } from 'firebase/firestore';
-import { getStorage, ref, uploadString, getDownloadURL, uploadBytes } from 'firebase/storage';
+import { getFirestore, collection, getDocs, getDoc, setDoc, doc, deleteDoc, updateDoc, addDoc } from 'firebase/firestore';
+import { getStorage, ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { app } from './firebaseConfig';
-import { cn, downloadUrl } from './lib/utils';
 import { query, where } from 'firebase/firestore';
 
 const storage = getStorage(app);
@@ -47,7 +41,6 @@ export default function Home() {
   const [showExpandedObservation, setShowExpandedObservation] = useState(false);
   const [showExpandedConclusion, setShowExpandedConclusion] = useState(false);
   const [isFetchingObservationById, setIsFetchingObservationById] = useState(false);
-  const [expandObservationIndex, setExpandObservationIndex] = useState('');
   const [defaultViewObservations, setDefaultViewObservations] = useState<ObservationDefaultView[]>([]);
   const [oneObservation, setOneObservation] = useState<PatientObservation | null>(null);
   const [isGeneratingConclusion, setIsGeneratingConclusion] = useState(false);
@@ -76,10 +69,6 @@ export default function Home() {
   const [hPhone, setHPhone] = useState('');
   const [showExpandedReportView, setShowExpandedReportView] = useState(false);
 
-  // TODO: 
-  // empty select scans input
-  // fix observation view and conclusion view or report view
-  
   // for testing purposes
   const sampleData = [
     "https://firebasestorage.googleapis.com/v0/b/comed-27032024.appspot.com/o/images%2FY12.jpg?alt=media&token=5e53394c-f012-4aee-901c-c028f1c2e570",
