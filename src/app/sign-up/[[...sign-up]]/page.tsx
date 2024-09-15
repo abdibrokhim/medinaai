@@ -1,5 +1,4 @@
 import { SignUp } from '@clerk/nextjs'
-import logo from '../../../../assets/logo_white.png'
 
 export default function SignUpPage() {
   return (
